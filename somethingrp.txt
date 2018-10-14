@@ -1,0 +1,9 @@
+"somethingrp"
+{
+	"base"		"base"
+	"title"		"somethingrp"
+	"maps"		""
+	"menusystem"	"1"
+	"workshopid"	""
+
+}
