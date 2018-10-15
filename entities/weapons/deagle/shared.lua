@@ -1,5 +1,5 @@
 if CLIENT then
-    SWEP.PrintName = "SRP_Deagle"
+    SWEP.PrintName = "Deagle"
     SWEP.Auther = "Noone"
     SWEP.slot = 1
     SWEP.slotPos = 1
@@ -8,7 +8,7 @@ if CLIENT then
     killicon.AddFont("weapon_deagle2", "CSKillIcons", SWEP.IconLetter, Color(255, 80, 0, 255))
 end
 
---[[ SWEP.Base = "weapon_cs_base2" ]]
+SWEP.Base = "weapon_cs_deagle"
 
 SWEP.Spawnable = true
 SWEP.AdminOnly = false
@@ -32,10 +32,17 @@ SWEP.Primary.ClipSize = 10
 SWEP.Primary.Delay = 0.1
 SWEP.Primary.DefaultClip = 10
 SWEP.Primary.Automatic = false
-SWEP.Primary.Ammo = "Pistol"
+SWEP.Primary.Ammo = "pistol"
 
+SWEP.Secondary.ClipSize = -1
+SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.Automatic = false
+SWEP.Secondary.Ammo = "pistol"
 
-function SWEP:PrimaryAttack()
+SWEP.IronSightsPos = Vector(-6.35, -7.5, 2.02)
+SWEP.IronSightsAng = Vector(0.51, 0, 0)
+
+--[[ function SWEP:PrimaryAttack()
     if( not self:CanPrimaryAttack() )then return end
 
     self:EmitSound("Weapon_Deagle_Single")
@@ -46,4 +53,4 @@ function SWEP:PrimaryAttack()
 
     self.Owner.ViewPunch(Angle(-1, 0, 0))
 
-end
+end ]]

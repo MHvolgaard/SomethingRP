@@ -19,7 +19,7 @@ function ChangeJobDescription(ply, s)
 end
 
 function GM:PlayerLoadout(ply)
-    ply:Give("SRP_Deagle")
+    ply:Give("Deagle")
 
     return true
 end
