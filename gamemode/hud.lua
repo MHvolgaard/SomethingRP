@@ -25,14 +25,14 @@ hook.Add("HUDPaint", "hud", function()
 	surface.SetFont("HUDStyle")
 	surface.SetTextColor(Color(255,255,255,255))
 	surface.SetTextPos(90, surface.ScreenHeight() -210)
-	draw.DrawText(string.upper(player:Team()), "HUDStyle", 120, surface.ScreenHeight()-215, Color(255,255,255,255), TEXT_ALIGN_CENTER)
+	draw.DrawText(string.upper(team.GetName(player:Team())), "HUDStyle", 120, surface.ScreenHeight()-215, Color(255,255,255,255), TEXT_ALIGN_CENTER)
 	-- Player name
 	surface.SetFont("HUDStyle")
 	surface.SetTextPos(30, surface.ScreenHeight() -170)
 	surface.DrawText("Name: " .. player:Nick())
 	-- Balance
 	surface.SetTextPos(30, surface.ScreenHeight() - 140)
-	surface.DrawText("Balance: ")
+	surface.DrawText("Balance: " .. player:getBalance())
 
 end)
 
