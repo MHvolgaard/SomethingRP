@@ -1,6 +1,6 @@
 "somethingrp"
 {
-	"base"		"base"
+	"base"		"sandbox"
 	"title"		"somethingrp"
 	"maps"		"rp_"
 	"menusystem"	"1"
