@@ -36,7 +36,7 @@ SWEP.HoldType = "ar2"
 
 SWEP.FiresUnderwater = false
 
-SWEP.DrawCrosshair = true
+SWEP.DrawCrosshair = false
 
 SWEP.DrawAmmo = true
 
@@ -57,6 +57,7 @@ SWEP.Primary.Automatic = true
 SWEP.Primary.Recoil = 1
 SWEP.Primary.Delay = 0.90
 SWEP.Primary.Force = 15
+SWEP.Primary.Cone = 0.02
 
 SWEP.Secondary.ClipSize = 0
 SWEP.Secondary.DefaultClip = 0
@@ -118,28 +119,81 @@ end ]]
             if(SERVER) then 
                 self.Owner:SetFOV( 45, 0 )
             end 
-            Zoom = 1 
-        else if(Zoom == 1) 
-            then 
-                if(SERVER) then 
-                self.Owner:SetFOV( 25, 0 ) 
-            end Zoom = 2 
-        else if(SERVER) then 
-            self.Owner:SetFOV( 0, 0 ) 
-        end 
-        Zoom = 0 
-    end 
-end 
-end 
+            Zoom = 1
+        elseif(Zoom == 1) then 
+            if(SERVER) then 
+                self.Owner:SetFOV( 25, 0 )
+            end
+            Zoom = 2
+        elseif(Zoom == 2) then 
+            if(SERVER) then 
+                self.Owner:SetFOV( 0, 0 )
+            end 
+            Zoom = 0
+        end
+    end
+
+
+
 function SWEP:Holster() 
     self.Owner:SetFOV( 0, 0 ) 
     ScopeLevel = 0 
     return true 
 end
-        
-    function SWEP:Reload()
-        self:EmitSound(Sound(self.ReloadSound))
-        self.Weapon:DefaultReload( ACT_VM_RELOAD );
-    end
-        
 
+function SWEP:Reload()
+    self:EmitSound(Sound(self.ReloadSound))
+    self.Weapon:DefaultReload( ACT_VM_RELOAD );
+end
+
+
+local scope = surface.GetTextureID("sprites/scope")
+function SWEP:DrawHUD()
+    if(Zoom == 0) then return end
+
+    surface.SetDrawColor( 0, 0, 0, 255 )
+         
+         local scrW = ScrW()
+         local scrH = ScrH()
+
+         local x = scrW / 2.0
+         local y = scrH / 2.0
+         local scope_size = scrH
+
+         -- crosshair
+         local gap = 80
+         local length = scope_size
+         surface.DrawLine( x - length, y, x - gap, y )
+         surface.DrawLine( x + length, y, x + gap, y )
+         surface.DrawLine( x, y - length, x, y - gap )
+         surface.DrawLine( x, y + length, x, y + gap )
+
+         gap = 0
+         length = 50
+         surface.DrawLine( x - length, y, x - gap, y )
+         surface.DrawLine( x + length, y, x + gap, y )
+         surface.DrawLine( x, y - length, x, y - gap )
+         surface.DrawLine( x, y + length, x, y + gap )
+
+
+         -- cover edges
+         local sh = scope_size / 2
+         local w = (x - sh) + 2
+         surface.DrawRect(0, 0, w, scope_size)
+         surface.DrawRect(x + sh - 2, 0, w, scope_size)
+         
+         -- cover gaps on top and bottom of screen
+         surface.DrawLine( 0, 0, scrW, 0 )
+         surface.DrawLine( 0, scrH - 1, scrW, scrH - 1 )
+
+         surface.SetDrawColor(255, 0, 0, 255)
+         surface.DrawLine(x, y, x + 1, y + 1)
+
+         -- scope
+         surface.SetTexture(scope)
+         surface.SetDrawColor(255, 255, 255, 255)
+
+surface.DrawTexturedRectRotated(x, y, scope_size, scope_size, 0)
+
+
+end

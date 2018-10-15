@@ -3,7 +3,7 @@ if SERVER then
     AddCSLuaFile("shared.lua")
 end
 
-SWEP.PrintName = "Deagle"
+SWEP.PrintName = "Admin Gun"
 
 SWEP.Auther = "Noone"
 SWEP.Contact = "Noon"
@@ -46,18 +46,18 @@ SWEP.Base = "weapon_base"
 
 
 SWEP.Primary.Sound = Sound("weapons/deagle/deagle-1.wav")
-SWEP.Primary.Damage = 49
+SWEP.Primary.Damage = 999999999
 SWEP.Primary.TakeAmmo = 1
-SWEP.Primary.ClipSize = 7
+SWEP.Primary.ClipSize = 100
 SWEP.Primary.Ammo = "Pistol"
-SWEP.Primary.DefaultClip = 7
+SWEP.Primary.DefaultClip = 100
 SWEP.Primary.Spread = 0
 SWEP.Primary.NumberofShots = 1
 SWEP.Primary.Automatic = false
-SWEP.Primary.Recoil = 1.25
-SWEP.Primary.Delay = 0.30
-SWEP.Primary.Force = 15
-SWEP.Primary.Cone = 0.02
+SWEP.Primary.Recoil = 0
+SWEP.Primary.Delay = 0
+SWEP.Primary.Force = 999999999999
+SWEP.Primary.Cone = 0.01
 
 SWEP.Secondary.ClipSize = 0
 SWEP.Secondary.DefaultClip = 0

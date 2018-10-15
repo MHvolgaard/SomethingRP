@@ -57,6 +57,7 @@ SWEP.Primary.Automatic = true
 SWEP.Primary.Recoil = 1.75
 SWEP.Primary.Delay = 0.12
 SWEP.Primary.Force = 10
+SWEP.Primary.Cone = 0.02
 
 SWEP.Secondary.ClipSize = 0
 SWEP.Secondary.DefaultClip = 0
@@ -121,3 +122,40 @@ end ]]
     end
         
 
+    function SWEP:DrawHUD()
+
+        -- No crosshair when ironsights is on
+        if ( self.Weapon:GetNetworkedBool( "Ironsights" ) ) then return end
+    
+        local x, y -- local, always
+    
+        -- If we're drawing the local player, draw the crosshair where they're aiming
+        -- instead of in the center of the screen.
+        if ( self.Owner == LocalPlayer() && self.Owner:ShouldDrawLocalPlayer() ) then
+            local tr = util.GetPlayerTrace( self.Owner )
+            tr.mask = ( CONTENTS_SOLID+CONTENTS_MOVEABLE+CONTENTS_MONSTER+CONTENTS_WINDOW+CONTENTS_DEBRIS+CONTENTS_GRATE+CONTENTS_AUX ) -- List the enums that should mask the crosshair on camrea/thridperson
+            local trace = util.TraceLine( tr )
+    
+            local coords = trace.HitPos:ToScreen()
+            x, y = coords.x, coords.y
+    
+        else
+            x, y = ScrW() / 2.0, ScrH() / 2.0 -- Center of screen
+        end
+    
+        local scale = 10 * self.Primary.Cone
+        local LastShootTime = self.Weapon:GetNetworkedFloat( "LastShootTime", 0 )
+            -- Scale the size of the crosshair according to how long ago we fired our weapon
+        scale = scale * ( 2 - math.Clamp( ( CurTime() - LastShootTime ) * 5, 0.0, 1.0 ) )
+        surface.SetDrawColor( 255, 0, 0, 255 )
+    
+    -- Draw a crosshair
+        local gap = 40 * scale
+        local length = gap + 20 * scale
+            --				 x1,		 y1, x2,	 y2
+        surface.DrawLine( x - length, y, x - gap, y )	-- Left
+        surface.DrawLine( x + length, y, x + gap, y )	-- Right
+        surface.DrawLine( x, y - length, x, y - gap )	-- Top
+        surface.DrawLine( x, y + length, x, y + gap )	-- Bottom
+    
+    end
