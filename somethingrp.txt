@@ -2,7 +2,7 @@
 {
 	"base"		"base"
 	"title"		"somethingrp"
-	"maps"		""
+	"maps"		"rp_"
 	"menusystem"	"1"
 	"workshopid"	""
 
