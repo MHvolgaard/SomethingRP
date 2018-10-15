@@ -42,8 +42,9 @@ SWEP.Secondary.Ammo = "pistol"
 SWEP.IronSightsPos = Vector(-6.35, -7.5, 2.02)
 SWEP.IronSightsAng = Vector(0.51, 0, 0)
 
---[[ function SWEP:PrimaryAttack()
-    if( not self:CanPrimaryAttack() )then return end
+function SWEP:PrimaryAttack()
+
+    if ( !self:CanPrimaryAttack()() ) then return end
 
     self:EmitSound("Weapon_Deagle_Single")
 
@@ -53,4 +54,8 @@ SWEP.IronSightsAng = Vector(0.51, 0, 0)
 
     self.Owner.ViewPunch(Angle(-1, 0, 0))
 
-end ]]
+end
+
+function SWEP:SecondaryAttack()
+
+end
