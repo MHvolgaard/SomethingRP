@@ -33,6 +33,9 @@ hook.Add("HUDPaint", "hud", function()
 	-- Balance
 	surface.SetTextPos(30, surface.ScreenHeight() - 140)
 	surface.DrawText("Balance: " .. player:GetBalance())
+	-- Health
+	surface.SetTextPos(30, surface.ScreenHeight() - 110)
+	surface.DrawText("Health: " .. player:Health())
 
 end)
 

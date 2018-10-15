@@ -12,7 +12,7 @@ function FirstSpawn( ply )
  
 	if cash == nil then --If it doesn't exist supply the player with the starting money amount
 		ply:SetPData("Balance", BALANCE_STARTAMOUNT) --Save it
-		ply:SetBalance( Balance_STARTAMOUNT ) --Set it to the networked ints that can be called from the client too
+		ply:SetBalance( BALANCE_STARTAMOUNT ) --Set it to the networked ints that can be called from the client too
 	else
 	ply:SetBalance( balance ) --If not, set the networked ints to what we last saved
 	end
