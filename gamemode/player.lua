@@ -1,3 +1,4 @@
+local player = LocalPlayer()
 local name = player:Nick()
 local alias = "Leeroy Jenkins"
 local balance

@@ -7,3 +7,5 @@ DeriveGamemode( "base" )
 function GM:Initialize(ply)
 	print("Welcome")
 end	
+
+team.SetUp(0, "Citizen", Color( 0, 225, 0 ))
