@@ -19,3 +19,14 @@ function FirstSpawn( ply )
  
 end
 hook.Add( "PlayerInitialSpawn", "playerInitialSpawn", FirstSpawn )
+
+function PrintBalance( ply )
+	ply:ChatPrint("Your balance is: " .. pl:GetBalance())
+end
+ 
+function fPlayerDisconnect( ply )
+	print("Player Disconnect: Balance saved")
+	ply:SaveBalance()
+end
+ 
+concommand.Add("balance_get",PrintBalance)
